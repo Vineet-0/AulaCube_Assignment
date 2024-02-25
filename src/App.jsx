@@ -6,17 +6,17 @@ function App() {
     const [comments, setComments] = useState([
         {
             content : "Hello I am Vineet",
-            timeStamp : "2021-10-10",
+            timeStamp : "25/02/2024, 11:31:23",
             isStared : true,
             replies : [
                 {
                     content : "Hi I am Raghav",
-                    timeStamp : "2021-10-11",
+                    timeStamp : "25/02/2024, 11:35:30",
                     isStared : false,
                     replies : [
                         {
                             content : "Hi Raghav",
-                            timeStamp : "2021-10-12",
+                            timeStamp : "25/02/2024, 11:36:35",
                             isStared : true,
                             replies : []
                         }
@@ -24,12 +24,12 @@ function App() {
                 },
                 {
                     content : "Hi I am Abhinav",
-                    timeStamp : "2021-10-11",
+                    timeStamp : "25/02/2024, 11:36:25",
                     isStared : false,
                     replies : [
                         {
                             content : "Hi Abhinav",
-                            timeStamp : "2021-10-12",
+                            timeStamp : "25/02/2024, 11:37:45",
                             isStared : true,
                             replies : []
                         }
@@ -65,7 +65,7 @@ function App() {
 
     return (
         <div className="w-full min-h-screen flex justify-center p-0 md:pt-[70px] absolute">
-            <div className="w-full h-screen md:h-full mx-0 md:w-4/5 xl:w-3/5 max-h-3/4 bg-white flex flex-col gap-4 p-6 rounded-lg border shadow">
+            <div className="w-full h-screen h-9/10 md:h-full mx-0 md:w-4/5 xl:w-3/5 max-h-3/4 bg-white flex flex-col gap-4 p-6 rounded-lg border shadow">
                 <div className="w-full pt-3">
                     <h1 className="text-3xl font-bold pb-3 md:pb-0">COMMENT SECTION</h1>
                 </div>
