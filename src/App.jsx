@@ -70,11 +70,11 @@ function App() {
                     <h1 className="text-3xl font-bold pb-3 md:pb-0">COMMENT SECTION</h1>
                 </div>
                 <div className="w-full flex items-center justify-end">
-                    <div className="flex-shrink-0 z-10 inline-flex items-center py-2.5 pl-4 pr-2 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-s-lg focus:ring-4 focus:outline-none focus:ring-gray-100">
+                    <div className="flex-shrink-0 z-10 inline-flex items-center py-1.5 md:py-2.5 pl-4 pr-2 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-s-lg focus:ring-4 focus:outline-none focus:ring-gray-100">
                         Sort According to
                     </div>
                     <div>
-                        <select id="states" className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-e-lg border-s-gray-100 dark:border-s-gray-700 border-s-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="states" className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-e-lg border-s-gray-100 dark:border-s-gray-700 border-s-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 md:p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="DP">Date Posted</option>
                             <option value="MR">Most Replied</option>
                         </select>

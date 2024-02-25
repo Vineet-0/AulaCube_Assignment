@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import Reply from './Reply'
 import { FaStar,FaRegStar } from "react-icons/fa";
+import { BsReplyFill } from "react-icons/bs";
+import { MdDelete } from "react-icons/md";
 
 const Comment = ({key,content,timeStamp,isStared,replies}) => {
     const [active,setActive] = useState(isStared);
@@ -26,8 +28,8 @@ const Comment = ({key,content,timeStamp,isStared,replies}) => {
                     {timeStamp}
                 </div>
                 <div className='flex items-center gap-1 py-2'>
-                    <button className="px-3 py-1 rounded-md text-sm text-white font-bold bg-green-500 hover:bg-green-600">Reply</button>
-                    <button className="px-3 py-1 rounded-md text-sm text-white font-bold bg-red-500 hover:bg-red-600">DELETE</button>
+                    <button className="flex items-center justify-between gap-1 px-3 py-1 rounded-md text-sm text-white font-bold bg-green-500 hover:bg-green-600"><BsReplyFill /> <h3 className="hidden md:block">REPLY</h3></button>
+                    <button className="flex items-center justify-between gap-1 px-3 py-1 rounded-md text-sm text-white font-bold bg-red-500 hover:bg-red-600"><MdDelete /> <h3 className="hidden md:block">DELETE</h3></button>
                 </div>
             </div>
         </div>
