@@ -11,12 +11,14 @@ const Reply = ({key}) => {
                     <h1 className='mr-6'>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis facere saepe perferendis exercitationem molestias reiciendis excepturi qui placeat nobis!
                     </h1>
-                    {active ? (
-                            <FaStar className='absolute top-4 right-4'/>
-                        ) : ( 
-                            <FaRegStar className='absolute top-4 right-4'/>
-                        )
-                    }
+                    <button className='absolute top-4 right-4' onClick={()=>setActive(!active)}>
+                        {active ? (
+                                <FaStar size={18} className='text-yellow-400'/>
+                            ) : ( 
+                                <FaRegStar size={18}/>
+                            )
+                        }
+                    </button>
                 </div>
                 <div className='flex items-center justify-start gap-1 py-2'>
                     <button className="px-3 py-1 rounded-md text-sm text-white font-bold bg-green-500 hover:bg-green-600">Reply</button>
