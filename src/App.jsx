@@ -1,9 +1,43 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import Comment from "./components/Comment"
 
 function App() {
+    const [ordering, setOrdering] = useState("DP");
     const [inputText, setInputText] = useState("");
     const [comments, setComments] = useState([
+        {
+            content : "Hello I am Vineet",
+            timeStamp : "24/02/2024, 11:31:23",
+            isStared : true,
+            replies : [
+                {
+                    content : "Hi I am Raghav",
+                    timeStamp : "24/02/2024, 11:35:30",
+                    isStared : false,
+                    replies : [
+                        {
+                            content : "Hi Raghav",
+                            timeStamp : "24/02/2024, 11:36:35",
+                            isStared : true,
+                            replies : []
+                        }
+                    ]
+                },
+                {
+                    content : "Hi I am Abhinav",
+                    timeStamp : "24/02/2024, 11:36:25",
+                    isStared : false,
+                    replies : [
+                        {
+                            content : "Hi Abhinav",
+                            timeStamp : "24/02/2024, 11:37:45",
+                            isStared : true,
+                            replies : []
+                        }
+                    ]
+                }
+            ]
+        },
         {
             content : "Hello I am Vineet",
             timeStamp : "25/02/2024, 11:31:23",
@@ -13,31 +47,78 @@ function App() {
                     content : "Hi I am Raghav",
                     timeStamp : "25/02/2024, 11:35:30",
                     isStared : false,
-                    replies : [
-                        {
-                            content : "Hi Raghav",
-                            timeStamp : "25/02/2024, 11:36:35",
-                            isStared : true,
-                            replies : []
-                        }
-                    ]
+                    replies : []
+                },
+            ]
+        },
+
+        {
+            content : "Hello I am Vineet",
+            timeStamp : "25/02/2024, 11:31:23",
+            isStared : true,
+            replies : [
+                {
+                    content : "Hi I am Raghav",
+                    timeStamp : "25/02/2024, 11:35:30",
+                    isStared : false,
+                    replies : [],
                 },
                 {
-                    content : "Hi I am Abhinav",
-                    timeStamp : "25/02/2024, 11:36:25",
+                    content : "Hi I am Raghav",
+                    timeStamp : "25/02/2024, 11:35:30",
                     isStared : false,
                     replies : [
                         {
-                            content : "Hi Abhinav",
-                            timeStamp : "25/02/2024, 11:37:45",
-                            isStared : true,
-                            replies : []
+                            content : "Hi I am Raghav",
+                            timeStamp : "25/02/2024, 11:35:30",
+                            isStared : false,
+                            replies : [],
                         }
-                    ]
-                }
+                    ],
+                },
+                {
+                    content : "Hi I am Raghav",
+                    timeStamp : "25/02/2024, 11:35:30",
+                    isStared : false,
+                    replies : [],
+                },
             ]
         },
     ]);
+
+    useEffect(() => {
+        // Sort comments based on the selected ordering criteria
+        const sortedComments = orderComments(comments, ordering);
+        setComments(sortedComments);
+    }, [ordering,comments]);
+
+    const orderComments = (comments, ordering) => {
+        return comments.slice().sort((a, b) => {
+          const dateA = new Date(
+            a.timeStamp.replace(/(\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2}):(\d{2})/, '$3-$2-$1T$4:$5:$6')
+          );
+          const dateB = new Date(
+            b.timeStamp.replace(/(\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2}):(\d{2})/, '$3-$2-$1T$4:$5:$6')
+          );
+      
+          if (ordering === "DP") {
+            // Sort by timestamp for Date Posted
+            if (dateA > dateB) return -1;
+            if (dateA < dateB) return 1;
+      
+            // If the dates are the same, compare hours
+            return dateB.getHours() - dateA.getHours();
+          } else if (ordering === "MR") {
+            // Sort by the number of replies for Most Replies
+            return b.replies.length - a.replies.length;
+          }
+          return 0;
+        });
+      };
+
+    const handleSelectChange = (e) => {
+        setOrdering(e.target.value);
+    };
 
     const handleInputChange = (e) => {
         setInputText(e.target.value);
@@ -74,20 +155,25 @@ function App() {
                         Sort According to
                     </div>
                     <div>
-                        <select id="states" className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-e-lg border-s-gray-100 dark:border-s-gray-700 border-s-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 md:p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select
+                            id="states"
+                            className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-e-lg border-s-gray-100 dark:border-s-gray-700 border-s-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 md:p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            onChange={handleSelectChange} // Add this line to handle changes
+                            value={ordering} // Add this line to bind to the state
+                        >
                             <option value="DP">Date Posted</option>
-                            <option value="MR">Most Replied</option>
+                            <option value="MR">Most Replies</option>
                         </select>
                     </div>
                 </div>
                 <div className="w-full md:h-[600px] overflow-y-auto rounded-md scrollbarHide flex flex-col gap-1">
-                {
-                    comments.map((comment,index) => {
-                        return (
-                            <Comment key={index} content={comment.content} timeStamp={comment.timeStamp} isStared={comment.isStared} replies={comment.replies}/>
-                        )
-                    })
-                }
+                    {
+                        comments.map((comment,index) => {
+                            return (
+                                <Comment key={index} content={comment.content} timeStamp={comment.timeStamp} isStared={comment.isStared} replies={comment.replies}/>
+                            )
+                        })
+                    }
                 </div>
                 <div className="w-full flex items-center justify-between gap-2">
                     <input
