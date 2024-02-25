@@ -2,15 +2,15 @@ import React,{useState} from 'react'
 import Reply from './Reply'
 import { FaStar,FaRegStar } from "react-icons/fa";
 
-const Comment = ({key}) => {
-    const [active,setActive] = useState(true);
+const Comment = ({key,content,timeStamp,isStared,replies}) => {
+    const [active,setActive] = useState(isStared);
 
   return (
     <div key={key}>
         <div className='w-full flex flex-col items-start gap-1'>
-            <div className='rounded-md p-3 border border-black bg-blue-200 relative'>
+            <div className='rounded-md p-4 border border-black bg-blue-200 relative w-full min-h-14'>
                 <h1 className='mr-6'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis facere saepe perferendis exercitationem molestias reiciendis excepturi qui placeat nobis!
+                    {content} , {timeStamp}
                 </h1>
                 <button className='absolute top-4 right-4' onClick={()=>setActive(!active)}>
                     {active ? (
@@ -26,11 +26,11 @@ const Comment = ({key}) => {
                 <button className="px-3 py-1 rounded-md text-sm text-white font-bold bg-red-500 hover:bg-red-600">DELETE</button>
             </div>
         </div>
-        <div className='border-l-2 ml-6 flex flex-col gap-1 mt-1'>
+        <div className='border-l-2 ml-8 flex flex-col gap-1 mt-1'>
             {
-                [1,2,3].map((index) => {
+                replies.map((reply,index) => {
                     return (
-                        <Reply key={index}/>
+                        <Reply key={index} content={reply.content} timeStamp={reply.timeStamp} isStared={reply.isStared} replies={reply.replies}/>
                     )
                 })
             }

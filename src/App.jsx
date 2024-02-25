@@ -1,6 +1,68 @@
+import { useState } from "react";
 import Comment from "./components/Comment"
 
 function App() {
+    const [inputText, setInputText] = useState("");
+    const [comments, setComments] = useState([
+        {
+            content : "Hello I am Vineet",
+            timeStamp : "2021-10-10",
+            isStared : true,
+            replies : [
+                {
+                    content : "Hi I am Raghav",
+                    timeStamp : "2021-10-11",
+                    isStared : false,
+                    replies : [
+                        {
+                            content : "Hi Raghav",
+                            timeStamp : "2021-10-12",
+                            isStared : true,
+                            replies : []
+                        }
+                    ]
+                },
+                {
+                    content : "Hi I am Abhinav",
+                    timeStamp : "2021-10-11",
+                    isStared : false,
+                    replies : [
+                        {
+                            content : "Hi Abhinav",
+                            timeStamp : "2021-10-12",
+                            isStared : true,
+                            replies : []
+                        }
+                    ]
+                }
+            ]
+        },
+    ]);
+
+    const handleInputChange = (e) => {
+        setInputText(e.target.value);
+    };
+    
+    const handleComment = () => {
+        if (inputText.trim() !== "") {
+            const newComment = {
+                content: inputText,
+                timeStamp: new Date().toLocaleString(),
+                isStared: false,
+                replies: [],
+            };
+    
+          // Create a copy of the existing comments array and add the new comment
+          const newComments = [...comments, newComment];
+    
+          // Update the state with the new comments array
+          setComments(newComments);
+    
+          // Clear the input field
+          setInputText("");
+        }
+    };
+
     return (
         <div className="w-full min-h-screen bg-blue-300 flex justify-center p-0 md:pt-[70px] absolute">
             <div className="w-full h-screen md:h-full mx-0 md:w-4/5 xl:w-3/5 max-h-3/4 bg-white flex flex-col gap-4 p-6 rounded-lg">
@@ -12,7 +74,7 @@ function App() {
                         Sort According to
                     </div>
                     <div>
-                        <select id="states" class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-e-lg border-s-gray-100 dark:border-s-gray-700 border-s-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="states" className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-e-lg border-s-gray-100 dark:border-s-gray-700 border-s-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="DP">Date Posted</option>
                             <option value="MR">Most Replied</option>
                         </select>
@@ -20,16 +82,27 @@ function App() {
                 </div>
                 <div className="w-full md:h-[600px] overflow-y-auto rounded-md scrollbarHide flex flex-col gap-1">
                 {
-                    [1,2,3,4,5,6,7,8,9,10].map((index) => {
+                    comments.map((comment,index) => {
                         return (
-                            <Comment key={index}/>
+                            <Comment key={index} content={comment.content} timeStamp={comment.timeStamp} isStared={comment.isStared} replies={comment.replies}/>
                         )
                     })
                 }
                 </div>
                 <div className="w-full flex items-center justify-between gap-2">
-                    <input type="text" className="w-full border border-black p-2 rounded-md" placeholder="What's on your mind?" />
-                    <button className="px-5 py-2 rounded-md text-lg text-white font-bold bg-blue-500 hover:bg-blue-600">Comment</button>
+                    <input
+                        type="text"
+                        className="w-full border border-black p-2 rounded-md"
+                        placeholder="What's on your mind?"
+                        value={inputText}
+                        onChange={handleInputChange}
+                    />
+                    <button
+                        className="px-5 py-2 rounded-md text-lg text-white font-bold bg-blue-500 hover:bg-blue-600"
+                        onClick={handleComment}
+                    >
+                        Comment
+                    </button>
                 </div>
             </div>
         </div>

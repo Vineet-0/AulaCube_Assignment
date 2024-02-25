@@ -2,20 +2,20 @@ import React,{useState} from 'react'
 import Reply2 from './Reply2'
 import { FaStar,FaRegStar } from "react-icons/fa";
 
-const Reply = ({key}) => {
-    const [active,setActive] = useState(false);
+const Reply = ({key,content,timeStamp,isStared,replies}) => {
+    const [active,setActive] = useState(isStared);
     return (
-        <div key={key} className='pl-6'>
+        <div key={key} className='pl-8'>
             <div className='w-full flex flex-col items-start gap-1'>
-                <div className='rounded-md p-3 border border-black bg-blue-200 relative'>
+                <div className='rounded-md p-4 border border-black bg-blue-200 relative w-full min-h-14'>
                     <h1 className='mr-6'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis facere saepe perferendis exercitationem molestias reiciendis excepturi qui placeat nobis!
+                        {content} , {timeStamp}
                     </h1>
                     <button className='absolute top-4 right-4' onClick={()=>setActive(!active)}>
                         {active ? (
-                                <FaStar size={18} className='text-yellow-400'/>
+                                <FaStar size={20} className='text-yellow-400'/>
                             ) : ( 
-                                <FaRegStar size={18}/>
+                                <FaRegStar size={20}/>
                             )
                         }
                     </button>
@@ -25,11 +25,11 @@ const Reply = ({key}) => {
                     <button className="px-3 py-1 rounded-md text-sm text-white font-bold bg-red-500 hover:bg-red-600">DELETE</button>
                 </div>
             </div>
-            <div className='border-l-2 ml-6 flex flex-col gap-1 mt-1'>
+            <div className='border-l-2 ml-8 flex flex-col gap-1 mt-1'>
                 {
-                    [1,2].map((index) => {
+                    replies.map((reply,index) => {
                         return (
-                            <Reply2 key={index} />
+                            <Reply2 key={index} content={reply.content} timeStamp={reply.timeStamp} isStared={reply.isStared} replies={reply.replies}/>
                         )
                     })
                 }
