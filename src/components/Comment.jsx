@@ -8,7 +8,7 @@ const Comment = ({key,content,timeStamp,isStared,replies}) => {
   return (
     <div key={key}>
         <div className='w-full flex flex-col items-start gap-1'>
-            <div className='rounded-md p-4 border border-black bg-blue-200 relative w-full min-h-14'>
+            <div className='rounded-md p-4 border shadow relative w-full min-h-14'>
                 <h1 className='mr-6'>
                     {content} , {timeStamp}
                 </h1>

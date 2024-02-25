@@ -64,10 +64,10 @@ function App() {
     };
 
     return (
-        <div className="w-full min-h-screen bg-blue-300 flex justify-center p-0 md:pt-[70px] absolute">
-            <div className="w-full h-screen md:h-full mx-0 md:w-4/5 xl:w-3/5 max-h-3/4 bg-white flex flex-col gap-4 p-6 rounded-lg">
+        <div className="w-full min-h-screen flex justify-center p-0 md:pt-[70px] absolute">
+            <div className="w-full h-screen md:h-full mx-0 md:w-4/5 xl:w-3/5 max-h-3/4 bg-white flex flex-col gap-4 p-6 rounded-lg border shadow">
                 <div className="w-full pt-3">
-                    <h1 className="text-3xl font-bold pb-3 md:pb-0">Comment Section</h1>
+                    <h1 className="text-3xl font-bold pb-3 md:pb-0">COMMENT SECTION</h1>
                 </div>
                 <div className="w-full flex items-center justify-end">
                     <div className="flex-shrink-0 z-10 inline-flex items-center py-2.5 pl-4 pr-2 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-s-lg focus:ring-4 focus:outline-none focus:ring-gray-100">
